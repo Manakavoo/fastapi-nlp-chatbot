@@ -1,0 +1,182 @@
+{
+  "predefined_questions": {
+    "Hello":{
+      "questions":[
+        "Hi",
+        "Hello",
+        "Good morning",
+        "Good afternoon",
+        "Hey there",
+        "Hello, I need some help",
+        "Hi, can you assist me"
+      ],
+      "graphql_query":""
+    },
+    "All_Orders": {
+      "questions": [
+        "Show me all blood orders",
+        "List all blood requests",
+        "Display all blood orders in the system",
+        "Get all blood orders",
+        "What blood orders do we have"
+      ],
+      "graphql_query": "query { bloodorderview { request_id first_name last_name blood_group status blood_bank_name } }"
+    },
+    "Order_Status": {
+      "questions": [
+        "What's the status of order {request_id}",
+        "Check the status for request ID {request_id}",
+        "Give me details for blood order {request_id}",
+        "Show information about order {request_id}",
+        "Status of blood request {request_id}"
+      ],
+      "graphql_query": "query { bloodorderview { request_id status blood_group blood_bank_name } }"
+    },
+    "Pending_Orders": {
+      "questions": [
+        "Show all pending blood orders",
+        "Which orders are waiting for approval",
+        "List all blood requests with pending status",
+        "Display pending blood requests",
+        "Get all orders with PA status"
+      ],
+      "graphql_query": "query { bloodorderview(where: {status: {_eq: \"PA\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+    },
+    "Approved_Orders": {
+      "questions": [
+        "Show all approved blood orders",
+        "Which orders have been approved",
+        "List all blood requests with approved status",
+        "Display approved blood requests",
+        "Get all orders with AA status"
+      ],
+      "graphql_query": "query { bloodorderview(where: {status: {_eq: \"AA\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+    },
+    "Rejected_Orders": {
+      "questions": [
+        "Show all rejected blood orders",
+        "Which orders were denied",
+        "List all blood requests with rejected status",
+        "Display rejected blood requests",
+        "Get all orders with REJ status"
+      ],
+      "graphql_query": "query { bloodorderview(where: {status: {_eq: \"REJ\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+    },
+    "Orders_By_Blood_Type": {
+      "questions": [
+        "Show all orders for blood type {blood_group}",
+        "List all requests for {blood_group} blood",
+        "How many orders do we have for blood group {blood_group}",
+        "Display {blood_group} blood orders",
+        "Get all {blood_group} blood requests"
+      ],
+      "graphql_query": "query { bloodorderview(where: {blood_group: {_eq: \"{blood_group_}\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+    },
+    "Orders_By_BloodBank": {
+      "questions": [
+        "Show all orders from {blood_bank_name}",
+        "List blood requests processed by {blood_bank_name}",
+        "Which orders are from {blood_bank_name}",
+        "Display orders from {blood_bank_name}",
+        "Get all blood requests at {blood_bank_name}"
+      ],
+      "graphql_query": "query { bloodorderview(where: {blood_bank_name: {_eq: \"{blood_bank_name_}\"}}) { request_id first_name last_name blood_group status } }"
+    },
+    "Orders_By_Status_And_BloodBank": {
+      "questions": [
+        "Show all {status} orders at {blood_bank_name}",
+        "List {status} requests from {blood_bank_name}",
+        "What {status} orders came from {blood_bank_name}",
+        "Display {status} blood requests at {blood_bank_name}",
+        "Get {status} orders for {blood_bank_name}"
+      ],
+      "graphql_query": "query { bloodorderview(where: {status: {_eq: \"{status_}\"}, blood_bank_name: {_eq: \"{blood_bank_name_}\"}}) { request_id first_name last_name blood_group status } }"
+    },
+    "Total_Orders_By_BloodBank": {
+      "questions": [
+        "How many orders has {blood_bank_name} processed",
+        "Count of blood requests handled by {blood_bank_name}",
+        "Total number of orders from {blood_bank_name}",
+        "Order count for {blood_bank_name}",
+        "How many blood requests did {blood_bank_name} receive"
+      ],
+      "graphql_query": "query { bloodorderview(where: {blood_bank_name: {_eq: \"{blood_bank_name_}\"}})  }"
+    },
+    "Billing_Overview": {
+      "questions": [
+        "Show billing overview for all blood banks",
+        "Give me the cost summary across all companies",
+        "Display billing information for all blood banks",
+        "What are our overall costs and billing",
+        "Show me cost and patient details"
+      ],
+      "graphql_query": "query { costandbillingview { company_name month overall_blood_unit total_cost total_patient } }"
+    },
+    "Billing_By_Company": {
+      "questions": [
+        "Show billing details for {company_name}",
+        "What are the costs for {company_name}",
+        "Display billing information for {company_name}",
+        "Cost breakdown for {company_name}",
+        "Billing summary for {company_name}"
+      ],
+      "graphql_query": "query { costandbillingview(where: {company_name: {_eq: \"{company_name_}\"}}) { company_name blood_component total_cost overall_blood_unit } }"
+    },
+    "Cost_By_Blood_Component": {
+      "questions": [
+        "What's the cost for {blood_component} across all hospitals",
+        "Show expenses for {blood_component}",
+        "How much are we spending on {blood_component}",
+        "Total cost of {blood_component}",
+        "Price summary for {blood_component}"
+      ],
+      "graphql_query": "query { costandbillingview(where: {blood_component: {_eq: \"{blood_component_}\"}}) { blood_component company_name total_cost } }"
+    },
+    "Total_Patients_By_Company": {
+      "questions": [
+        "How many patients does {company_name} have",
+        "Patient count for {company_name}",
+        "Total number of patients at {company_name}",
+        "How many people received blood at {company_name}",
+        "Patient statistics for {company_name}"
+      ],
+      "graphql_query": "query { costandbillingview(where: {company_name: {_eq: \"{company_name_}\"}}) { company_name total_patient } }"
+    },
+    "Blood_Usage_By_Company": {
+      "questions": [
+        "How many blood units has {company_name} used",
+        "Blood usage for {company_name}",
+        "Total blood units consumed by {company_name}",
+        "Blood supply utilization by {company_name}",
+        "How much blood did {company_name} require"
+      ],
+      "graphql_query": "query { costandbillingview(where: {company_name: {_eq: \"{company_name_}\"}}) { company_name overall_blood_unit } }"
+    },
+    "Recent_Orders": {
+      "questions": [
+        "Show the most recent blood orders",
+        "What are the latest blood requests",
+        "Display the newest blood orders",
+        "Show recent blood order activity",
+        "Get the latest 5 blood requests"
+      ],
+      "graphql_query": "query { bloodorderview(order_by: {request_id: desc}, limit: 5) { request_id first_name last_name blood_group status blood_bank_name } }"
+    },
+   
+    "Bye":{
+      "questions":[
+        "Bye",
+        "thank you",
+        "thanks",
+        "See you later",
+        "Goodbye",
+        "Thanks, that's all",
+        "That's all I needed",
+        "Thank you for your help"
+      ],
+      "graphql_query":""
+    }
+    
+  }
+}
+

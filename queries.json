@@ -1,0 +1,77 @@
+{
+    "queries": {
+      "All_Orders": {
+        "description": "Get all blood orders.",
+        "query": "query { bloodorderview { request_id first_name last_name blood_group status blood_bank_name } }"
+      },
+      "Order_Status": {
+        "description": "Get the status of a specific order by request ID.",
+        "query": "query { bloodorderview { request_id first_name status blood_group status blood_bank_name } }"
+      },
+      "Pending_Orders": {
+        "description": "Get all pending orders (status: PA).",
+        "query": "query { bloodorderview(where: {status: {_eq: \"PA\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+      },
+      "Approved_Orders": {
+        "description": "Get all approved orders (status: AA).",
+        "query": "query { bloodorderview(where: {status: {_eq: \"AA\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+      },
+      "Rejected_Orders": {
+        "description": "Get all rejected orders (status: REJ).",
+        "query": "query { bloodorderview(where: {status: {_eq: \"REJ\"}}) { request_id first_name last_name blood_group status blood_bank_name } }"
+      },
+      "Orders_By_Blood_Type": {
+        "description": "Get all orders for a specific blood type.",
+        "query": "query { bloodorderview { request_id first_name last_name blood_group status blood_bank_name } }"
+      },
+      "Orders_By_BloodBank": {
+        "description": "Get all orders from a specific blood bank.",
+        "query": "query { bloodorderview { request_id first_name last_name blood_group status } }"
+      },
+      "Orders_By_Status_And_BloodBank": {
+        "description": "Get all orders for a specific blood bank with a specific status.",
+        "query": "query { bloodorderview { request_id first_name last_name blood_group status } }"
+      },
+      "Total_Orders_By_BloodBank": {
+        "description": "Get the total number of orders handled by a blood bank.",
+        "query": "query { bloodorderview { request_id first_name last_name blood_group status } }"
+      },
+      "Billing_Overview": {
+        "description": "Get cost and patient details for all blood banks.",
+        "query": "query { costandbillingview { company_name month overall_blood_unit total_cost total_patient } }"
+      },
+      "Billing_By_Company": {
+        "description": "Get billing details for a specific hospital or company.",
+        "query": "query { costandbillingview { company_name blood_component total_cost overall_blood_unit } }"
+      },
+      "Cost_By_Blood_Component": {
+        "description": "Get the total cost for a specific blood component.",
+        "query": "query { costandbillingview { blood_component company_name total_cost } }"
+      },
+      "Total_Patients_By_Company": {
+        "description": "Get the total number of patients for a specific company.",
+        "query": "query { costandbillingview { company_name total_patient } }"
+      },
+      "Blood_Usage_By_Company": {
+        "description": "Get the total blood units used by a specific company.",
+        "query": "query { costandbillingview { company_name overall_blood_unit } }"
+      },
+      "Recent_Orders": {
+        "description": "Get the most recent 5 blood orders.",
+        "query": "query { bloodorderview(order_by: {request_id: desc}, limit: 5) { request_id first_name last_name blood_group status blood_bank_name } }"
+      },
+      "Bye": {
+        "description": "End the conversation.",
+        "query": "Thank you , let me know if there is anything else I can help you with."
+      },
+      "Hello":{
+        "description": "Greet the user.",
+        "query": "{ \"Hello! How can I help you today?\" }"
+      },
+      "Unknown": {
+        "description": "Handles unknown queries.",
+        "query": "{ \"I'm sorry, but I couldn't find relevant data for your request.\" }"
+      }
+    }
+  }
+  
