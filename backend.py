@@ -6,7 +6,7 @@ import os
 from graphQL import GraphqlClient
 from model import Openai_model
 from query_match import  keyword_match #, find_matching_query
-
+import ast
 import os
 
 # Load `.env` only in local development
@@ -15,6 +15,7 @@ if os.getenv("RENDER") is None:  # Render automatically sets 'RENDER' in hosted 
 
 HASURA_GRAPHQL_URL = os.getenv("HASURA_GRAPHQL_URL")
 HASURA_ADMIN_SECRET = os.getenv("HASURA_ADMIN_SECRET")
+HASURA_ROLE = os.getenv("HASURA_ROLE")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 class ChatRequest(BaseModel):
@@ -24,7 +25,7 @@ class ChatRequest(BaseModel):
 
 app=FastAPI()
 
-graphql_client = GraphqlClient(HASURA_GRAPHQL_URL,HASURA_ADMIN_SECRET)
+graphql_client = GraphqlClient(HASURA_GRAPHQL_URL,HASURA_ADMIN_SECRET,HASURA_ROLE)
 Openai_client = Openai_model(OPENAI_API_KEY)
 
 
@@ -99,6 +100,7 @@ def chat(request:ChatRequest):
     updates = {
         "message": message,
         "query":query,
+        "data": data,
         "response": response,
         "suggested_actions": suggested_actions
     }

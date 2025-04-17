@@ -5,7 +5,7 @@ from prompt import  generate_graphql_prompt
 
 class Openai_model:
     def __init__(self, api_key):
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))   
+        self.client = OpenAI(api_key=api_key)   
         self.model="gpt-4o-mini"
 
     def generate_response(self, data,user_message,role=None): 
@@ -196,3 +196,4 @@ class Openai_model:
 
 
 
+print("model loaded")
