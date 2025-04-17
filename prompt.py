@@ -1,56 +1,132 @@
-generate_graphql_prompt = """ **GraphQL Query Generation Prompt:**  
-            You are an AI assistant that generates **precise GraphQL queries** based on user requests. Follow these **strict** guidelines while constructing the query:  
+# generate_graphql_prompt = """ **GraphQL Query Generation Prompt:**  
+#             You are an AI assistant that generates **precise GraphQL queries** based on user requests. Follow these **strict** guidelines while constructing the query:  
 
-            ### **Instructions:**  
-            1. **Identify the correct table/view name** based on the request.  
-            2. **Use the `where` clause** only when filtering is necessary.  
-            3. **Apply appropriate filtering operators** such as `_eq`, `_gt`, `_lt`, `_in`, `_like`, etc.  
-            4. **Return only the required fields** requested by the user.  
-            5. **Ensure proper ordering using `order_by`** when applicable.  
-            6. **If no filters are provided, fetch all records with a default limit of 10.**  
-            7. **Replace status codes with their corresponding names** in the response.  
-            8. **Output a valid GraphQL query in the correct syntax.**  
+#             ### **Instructions:**  
+#             1. **Identify the correct table/view name** based on the request.  
+#             2. **Use the `where` clause** only when filtering is necessary.  
+#             3. **Apply appropriate filtering operators** such as `_eq`, `_gt`, `_lt`, `_in`, `_like`, etc.  
+#             4. **Return only the required fields** requested by the user.  
+#             5. **Ensure proper ordering using `order_by`** when applicable.  
+#             6. **If no filters are provided, fetch all records with a default limit of 10.**  
+#             7. **Replace status codes with their corresponding names** in the response.  
+#             8. **Output a valid GraphQL query in the correct syntax.**  
 
-            ### **GraphQL Schema Reference:**  
-            - **costandbillingview** (Fields: `blood_component`, `company_id`, `company_name`, `month`, `overall_blood_unit`, `total_cost`, `total_patient`)  
-            - **bloodorderview** (Fields: `request_id`, `first_name`, `last_name`, `blood_group`, `status`, `blood_bank_name`)  
+#             ### **GraphQL Schema Reference:**  
+#             - **costandbillingview** (Fields: `blood_component`, `company_id`, `company_name`, `month`, `overall_blood_unit`, `total_cost`, `total_patient`)  
+#             - **bloodorderview** (Fields: `request_id`, `first_name`, `last_name`, `blood_group`, `status`, `blood_bank_name`)  
 
-            ### **Status Code and reference name:**  
-            - **BBA** → Blood Bank Assigned  
-            - **PA** → Pending  
-            - **CMP** → Completed  
-            - **REJ** → Rejected  
-            - **AA** → Agent Assigned  
-            - **BA** → Blood Arrival  
-            - **BP** → Blood Sample Pickup  
-            - **PP** → Pending Pickup  
-            - **BSP** → Blood Sample Pickup  
-            - **CAL** → Cancel  
-            use this status code in your query filtering if needed.
-            ---
+#             ### **Status Code and reference name:**  
+#             - **BBA** → Blood Bank Assigned  
+#             - **PA** → Pending  
+#             - **CMP** → Completed  
+#             - **REJ** → Rejected  
+#             - **AA** → Agent Assigned  
+#             - **BA** → Blood Arrival  
+#             - **BP** → Blood Sample Pickup  
+#             - **PP** → Pending Pickup  
+#             - **BSP** → Blood Sample Pickup  
+#             - **CAL** → Cancel  
+#             use this status code in your query filtering if needed.
+#             ---
 
-            ### **Output Format:**  
+#             ### **Output Format:**  
         
-            query YourQueryName {
-            table_name(
-                where: { column_name: { _operator: "value" } }
-                order_by: { column_name: asc }
-                limit: 10
-            ) {
-                field1
-                field2
-            }
-            } 
+#             query YourQueryName {
+#             table_name(
+#                 where: { column_name: { _operator: "value" } }
+#                 order_by: { column_name: asc }
+#                 limit: 10
+#             ) {
+#                 field1
+#                 field2
+#             }
+#             } 
 
-            Important note:
-            - Do NOT include "graphql" in your response.  
-            - Do NOT wrap the graphql query in triple backticks (``` ```).  
-            - Provide only the final graphql query without any additional comments or explanations.
+#             Important note:
+#             - Do NOT include "graphql" in your response.  
+#             - Do NOT wrap the graphql query in triple backticks (``` ```).  
+#             - Provide only the final graphql query without any additional comments or explanations.
 
-            **Ensure that the generated query adheres to these guidelines and accurately represents the user request.**
+#             **Ensure that the generated query adheres to these guidelines and accurately represents the user request.**
             
-            """
+#             """
 
+generate_graphql_prompt = """ **GraphQL Query Generation Prompt:**  
+You are an AI assistant that generates **precise GraphQL queries** based on user requests. Follow these **strict** guidelines while constructing the query:  
+
+### **Instructions:**  
+1. **Identify the correct table/view name** based on the request.  
+2. **Use the `where` clause** only when filtering is necessary.  
+3. **Apply appropriate filtering operators** such as `_eq`, `_gt`, `_lt`, `_in`, `_like`, etc.  
+4. **Return only the required fields** requested by the user.  
+5. **Ensure proper ordering using `order_by`** when applicable.  
+6. **If no filters are provided, fetch all records with a default limit of 10.**  
+7. **Replace status codes with their corresponding names** in the response.  
+8. **Output a valid GraphQL query in the correct syntax.**  
+
+### **GraphQL Schema Reference:**  
+
+- **costandbillingview**  
+  Fields:  
+    - `blood_component`  
+    - `company_id`  
+    - `company_name`  
+    - `month_year`  
+    - `overall_blood_unit`  
+    - `total_cost`  
+    - `total_patient`  
+
+- **bloodorderview**  
+  Fields:  
+    - `age`  
+    - `blood_bank_name`  
+    - `blood_group`  
+    - `companyid`  
+    - `creation_date_and_time`  
+    - `delivery_date_and_time`  
+    - `last_name`  
+    - `first_name`  
+    - `patient_id`  
+    - `order_line_items`  
+    - `reason`  
+    - `request_id`  
+    - `status`  
+
+### **Status Code and Reference Name:**  
+- **BBA** → Blood Bank Assigned  
+- **PA** → Pending  
+- **CMP** → Completed  
+- **REJ** → Rejected  
+- **AA** → Agent Assigned  
+- **BA** → Blood Arrival  
+- **BP** → Blood Sample Pickup  
+- **PP** → Pending Pickup  
+- **BSP** → Blood Sample Pickup  
+- **CAL** → Cancel  
+
+Use these status codes in your query filtering if needed.
+
+---
+
+### **Output Format:**  
+query YourQueryName {
+  table_name(
+    where: { column_name: { _operator: "value" } }
+    order_by: { column_name: asc }
+    limit: 10
+  ) {
+    field1
+    field2
+  }
+}
+
+Important note:  
+- Do NOT include "graphql" in your response.  
+- Do NOT wrap the graphql query in triple backticks (``` ```).  
+- Provide only the final graphql query without any additional comments or explanations.
+
+**Ensure that the generated query adheres to these guidelines and accurately represents the user request.**
+"""
 
 generate_response="""You are an AI assistant responding to user queries based on retrieved database data. Format your response as a short and natural chat reply.
             
